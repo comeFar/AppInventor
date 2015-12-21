@@ -1,0 +1,18 @@
+<!-- Indices written at Thu, 10 Dec 2015 19:35:07 PST -->
+
+<datastore-indexes>
+
+    <!-- Used 6 times in query history -->
+    <datastore-index kind="GalleryAppData" ancestor="false" source="auto">
+        <property name="active" direction="asc"/>
+        <property name="dateModified" direction="desc"/>
+    </datastore-index>
+
+    <!-- Used 3 times in query history -->
+    <datastore-index kind="GalleryAppData" ancestor="false" source="auto">
+        <property name="active" direction="asc"/>
+        <property name="numLikes" direction="desc"/>
+        <property name="numDownloads" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>

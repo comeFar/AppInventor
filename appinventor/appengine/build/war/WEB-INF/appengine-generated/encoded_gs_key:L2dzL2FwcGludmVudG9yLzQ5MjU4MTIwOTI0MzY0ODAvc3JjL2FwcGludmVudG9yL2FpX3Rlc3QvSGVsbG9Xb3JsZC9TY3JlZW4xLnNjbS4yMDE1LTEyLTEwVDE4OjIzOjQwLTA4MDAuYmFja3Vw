@@ -1,0 +1,4 @@
+#|
+$JSON
+{"YaVersion":"138","Source":"Form","Properties":{"$Name":"Screen1","$Type":"Form","$Version":"18","AppName":"HelloWorld","Title":"Screen1","Uuid":"0","$Components":[{"$Name":"Button1","$Type":"Button","$Version":"6","Text":"Text for Button1","Uuid":"-1518723890"}]}}
+|#

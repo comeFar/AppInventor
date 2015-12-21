@@ -1,0 +1,387 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="procedures_defnoreturn" id="1" x="-116" y="-1070">
+    <mutation></mutation>
+    <field name="NAME">displayQAs</field>
+    <statement name="STACK">
+      <block type="component_set_get" id="2" inline="false">
+        <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="QuestionsAnswersLabel"></mutation>
+        <field name="COMPONENT_SELECTOR">QuestionsAnswersLabel</field>
+        <field name="PROP">Text</field>
+        <value name="VALUE">
+          <block type="text" id="3">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <next>
+          <block type="lexical_variable_set" id="4" inline="false">
+            <field name="VAR">global answerIndex</field>
+            <value name="VALUE">
+              <block type="math_number" id="5">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_forEach" id="6" inline="false">
+                <field name="VAR">question</field>
+                <comment pinned="false" h="71" w="295">For each can only walk through one list at a time (QuestionList) so we use an index (answerIndex) to simultaneously walk through the answers.</comment>
+                <value name="LIST">
+                  <block type="lexical_variable_get" id="7">
+                    <field name="VAR">global QuestionList</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="lexical_variable_set" id="8" inline="false">
+                    <field name="VAR">global answer</field>
+                    <value name="VALUE">
+                      <block type="lists_select_item" id="9" inline="false">
+                        <comment pinned="false" h="80" w="160">Get the answer corresponding to each question.</comment>
+                        <value name="LIST">
+                          <block type="lexical_variable_get" id="10">
+                            <field name="VAR">global AnswerList</field>
+                          </block>
+                        </value>
+                        <value name="NUM">
+                          <block type="lexical_variable_get" id="11">
+                            <field name="VAR">global answerIndex</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="lexical_variable_set" id="12" inline="false">
+                        <field name="VAR">global answerIndex</field>
+                        <comment pinned="false" h="80" w="160">Increment the index to get the next answer.</comment>
+                        <value name="VALUE">
+                          <block type="math_add" id="13" inline="true">
+                            <mutation items="2"></mutation>
+                            <value name="NUM0">
+                              <block type="lexical_variable_get" id="14">
+                                <field name="VAR">global answerIndex</field>
+                              </block>
+                            </value>
+                            <value name="NUM1">
+                              <block type="math_number" id="15">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="component_set_get" id="16" inline="false">
+                            <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="QuestionsAnswersLabel"></mutation>
+                            <field name="COMPONENT_SELECTOR">QuestionsAnswersLabel</field>
+                            <field name="PROP">Text</field>
+                            <value name="VALUE">
+                              <block type="text_join" id="17" inline="false">
+                                <mutation items="5"></mutation>
+                                <comment pinned="false" h="80" w="160">Show QA pairs, one on each line (\n is a newline).</comment>
+                                <value name="ADD0">
+                                  <block type="component_set_get" id="18">
+                                    <mutation component_type="Label" set_or_get="get" property_name="Text" is_generic="false" instance_name="QuestionsAnswersLabel"></mutation>
+                                    <field name="COMPONENT_SELECTOR">QuestionsAnswersLabel</field>
+                                    <field name="PROP">Text</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="text" id="19">
+                                    <field name="TEXT">\n</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="lexical_variable_get" id="20">
+                                    <field name="VAR">question</field>
+                                    <comment pinned="false" h="80" w="160">This is the for each variable, only accessible inside the for each block.</comment>
+                                  </block>
+                                </value>
+                                <value name="ADD3">
+                                  <block type="text" id="21">
+                                    <field name="TEXT">:</field>
+                                  </block>
+                                </value>
+                                <value name="ADD4">
+                                  <block type="lexical_variable_get" id="22">
+                                    <field name="VAR">global answer</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="23" collapsed="true" x="35" y="-642">
+    <mutation component_type="Button" instance_name="SubmitButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">SubmitButton</field>
+    <comment pinned="false" h="80" w="160">The user clicking on submit triggers the processing.</comment>
+    <statement name="DO">
+      <block type="lists_add_items" id="24" inline="false">
+        <mutation items="1"></mutation>
+        <comment pinned="false" h="80" w="160">Take user input from textboxes and add to lists.</comment>
+        <value name="LIST">
+          <block type="lexical_variable_get" id="25">
+            <field name="VAR">global QuestionList</field>
+          </block>
+        </value>
+        <value name="ITEM0">
+          <block type="component_set_get" id="26">
+            <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="QuestionText"></mutation>
+            <field name="COMPONENT_SELECTOR">QuestionText</field>
+            <field name="PROP">Text</field>
+          </block>
+        </value>
+        <next>
+          <block type="lists_add_items" id="27" inline="false">
+            <mutation items="1"></mutation>
+            <value name="LIST">
+              <block type="lexical_variable_get" id="28">
+                <field name="VAR">global AnswerList</field>
+              </block>
+            </value>
+            <value name="ITEM0">
+              <block type="component_set_get" id="29">
+                <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="AnswerText"></mutation>
+                <field name="COMPONENT_SELECTOR">AnswerText</field>
+                <field name="PROP">Text</field>
+              </block>
+            </value>
+            <next>
+              <block type="procedures_callnoreturn" id="30">
+                <mutation name="displayQAs"></mutation>
+                <field name="PROCNAME">displayQAs</field>
+                <comment pinned="false" h="80" w="160">The call to the displayQAs replaces the blocks below.</comment>
+                <next>
+                  <block type="component_set_get" id="31" inline="false">
+                    <mutation component_type="TextBox" set_or_get="set" property_name="Text" is_generic="false" instance_name="QuestionText"></mutation>
+                    <field name="COMPONENT_SELECTOR">QuestionText</field>
+                    <field name="PROP">Text</field>
+                    <value name="VALUE">
+                      <block type="text" id="32">
+                        <field name="TEXT"></field>
+                        <comment pinned="false" h="80" w="160">Blank out the two input textboxes.</comment>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="component_set_get" id="33" inline="false">
+                        <mutation component_type="TextBox" set_or_get="set" property_name="Text" is_generic="false" instance_name="AnswerText"></mutation>
+                        <field name="COMPONENT_SELECTOR">AnswerText</field>
+                        <field name="PROP">Text</field>
+                        <value name="VALUE">
+                          <block type="text" id="34">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="component_method" id="35" inline="false">
+                            <mutation component_type="TinyWebDB" method_name="StoreValue" is_generic="false" instance_name="TinyWebDB1"></mutation>
+                            <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+                            <comment pinned="false" h="80" w="160">Copy the QuestionList data to the database (and AnswerList below).</comment>
+                            <value name="ARG0">
+                              <block type="text" id="36">
+                                <field name="TEXT">questions</field>
+                              </block>
+                            </value>
+                            <value name="ARG1">
+                              <block type="lexical_variable_get" id="37">
+                                <field name="VAR">global QuestionList</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="component_method" id="38" inline="false">
+                                <mutation component_type="TinyWebDB" method_name="StoreValue" is_generic="false" instance_name="TinyWebDB1"></mutation>
+                                <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+                                <value name="ARG0">
+                                  <block type="text" id="39">
+                                    <field name="TEXT">answers</field>
+                                  </block>
+                                </value>
+                                <value name="ARG1">
+                                  <block type="lexical_variable_get" id="40">
+                                    <field name="VAR">global AnswerList</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="global_declaration" id="41" inline="false" x="-10" y="-504">
+    <field name="NAME">answer</field>
+    <value name="VALUE">
+      <block type="text" id="42">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="43" inline="false" x="306" y="-504">
+    <field name="NAME">QuestionList</field>
+    <value name="VALUE">
+      <block type="lists_create_with" id="44">
+        <mutation items="0"></mutation>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="45" inline="false" x="747" y="-504">
+    <field name="NAME">AnswerList</field>
+    <value name="VALUE">
+      <block type="lists_create_with" id="46">
+        <mutation items="0"></mutation>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="47" inline="false" x="-10" y="-453">
+    <field name="NAME">answerIndex</field>
+    <value name="VALUE">
+      <block type="math_number" id="48">
+        <field name="NUM">1</field>
+      </block>
+    </value>
+  </block>
+  <block type="component_event" id="49" collapsed="true" x="300" y="-453">
+    <mutation component_type="Form" instance_name="Screen1" event_name="Initialize"></mutation>
+    <field name="COMPONENT_SELECTOR">Screen1</field>
+    <statement name="DO">
+      <block type="component_method" id="50" inline="false">
+        <mutation component_type="TinyWebDB" method_name="GetValue" is_generic="false" instance_name="TinyWebDB1"></mutation>
+        <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+        <value name="ARG0">
+          <block type="text" id="51">
+            <field name="TEXT">questions</field>
+          </block>
+        </value>
+        <next>
+          <block type="component_method" id="52" inline="false">
+            <mutation component_type="TinyWebDB" method_name="GetValue" is_generic="false" instance_name="TinyWebDB1"></mutation>
+            <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+            <value name="ARG0">
+              <block type="text" id="53">
+                <field name="TEXT">answers</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="54" collapsed="true" x="751" y="-453">
+    <mutation component_type="TinyWebDB" instance_name="TinyWebDB1" event_name="GotValue"></mutation>
+    <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+    <statement name="DO">
+      <block type="controls_if" id="55" inline="false">
+        <value name="IF0">
+          <block type="lists_is_list" id="56" inline="false">
+            <value name="ITEM">
+              <block type="lexical_variable_get" id="57">
+                <mutation>
+                  <eventparam name="valueFromWebDB"></eventparam>
+                </mutation>
+                <field name="VAR">valueFromWebDB</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="controls_if" id="58" inline="false">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="math_compare" id="59" inline="true">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="lexical_variable_get" id="60">
+                    <mutation>
+                      <eventparam name="tagFromWebDB"></eventparam>
+                    </mutation>
+                    <field name="VAR">tagFromWebDB</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="text" id="61">
+                    <field name="TEXT">questions</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="lexical_variable_set" id="62" inline="false">
+                <field name="VAR">global QuestionList</field>
+                <value name="VALUE">
+                  <block type="lexical_variable_get" id="63">
+                    <mutation>
+                      <eventparam name="valueFromWebDB"></eventparam>
+                    </mutation>
+                    <field name="VAR">valueFromWebDB</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="lexical_variable_set" id="64" inline="false">
+                <field name="VAR">global AnswerList</field>
+                <value name="VALUE">
+                  <block type="lexical_variable_get" id="65">
+                    <mutation>
+                      <eventparam name="valueFromWebDB"></eventparam>
+                    </mutation>
+                    <field name="VAR">valueFromWebDB</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="66" inline="false">
+                <value name="IF0">
+                  <block type="math_compare" id="67" inline="true">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="lists_length" id="68" inline="false">
+                        <value name="LIST">
+                          <block type="lexical_variable_get" id="69">
+                            <field name="VAR">global QuestionList</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="lists_length" id="70" inline="false">
+                        <value name="LIST">
+                          <block type="lexical_variable_get" id="71">
+                            <field name="VAR">global AnswerList</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="procedures_callnoreturn" id="72">
+                    <mutation name="displayQAs"></mutation>
+                    <field name="PROCNAME">displayQAs</field>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <yacodeblocks ya-version="138" language-version="19"></yacodeblocks>
+</xml>

@@ -1,0 +1,79 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="component_event" id="1" x="609" y="8">
+    <mutation component_type="Form" instance_name="Screen1" event_name="Initialize"></mutation>
+    <field name="COMPONENT_SELECTOR">Screen1</field>
+    <comment pinned="false" h="68" w="207">When the app is started this event is triggered.</comment>
+    <statement name="DO">
+      <block type="component_set_get" id="2" inline="false">
+        <mutation component_type="ListPicker" set_or_get="set" property_name="Elements" is_generic="false" instance_name="ListPicker1"></mutation>
+        <field name="COMPONENT_SELECTOR">ListPicker1</field>
+        <field name="PROP">Elements</field>
+        <comment pinned="false" h="76" w="260">This sets the ListPicker elements to the items within the Destinations list.</comment>
+        <value name="VALUE">
+          <block type="lexical_variable_get" id="3">
+            <field name="VAR">global Destinations</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="4" x="616" y="121">
+    <mutation component_type="ListPicker" instance_name="ListPicker1" event_name="AfterPicking"></mutation>
+    <field name="COMPONENT_SELECTOR">ListPicker1</field>
+    <statement name="DO">
+      <block type="component_set_get" id="5" inline="false">
+        <mutation component_type="ActivityStarter" set_or_get="set" property_name="DataUri" is_generic="false" instance_name="ActivityStarter1"></mutation>
+        <field name="COMPONENT_SELECTOR">ActivityStarter1</field>
+        <field name="PROP">DataUri</field>
+        <value name="VALUE">
+          <block type="text_join" id="6" inline="false">
+            <mutation items="2"></mutation>
+            <value name="ADD0">
+              <block type="text" id="7">
+                <field name="TEXT">http://maps.google.com/?q=</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="component_set_get" id="8">
+                <mutation component_type="ListPicker" set_or_get="get" property_name="Selection" is_generic="false" instance_name="ListPicker1"></mutation>
+                <field name="COMPONENT_SELECTOR">ListPicker1</field>
+                <field name="PROP">Selection</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="component_method" id="9">
+            <mutation component_type="ActivityStarter" method_name="StartActivity" is_generic="false" instance_name="ActivityStarter1"></mutation>
+            <field name="COMPONENT_SELECTOR">ActivityStarter1</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="global_declaration" id="10" inline="false" x="620" y="250">
+    <field name="NAME">Destinations</field>
+    <comment pinned="false" h="70" w="151">List of destinations.</comment>
+    <value name="VALUE">
+      <block type="lists_create_with" id="11" inline="false">
+        <mutation items="3"></mutation>
+        <value name="ADD0">
+          <block type="text" id="12">
+            <field name="TEXT">Tour Eiffel</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="text" id="13">
+            <field name="TEXT">Musée du Louvre</field>
+          </block>
+        </value>
+        <value name="ADD2">
+          <block type="text" id="14">
+            <field name="TEXT">Cathédrale Notre Dame</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <yacodeblocks ya-version="138" language-version="19"></yacodeblocks>
+</xml>

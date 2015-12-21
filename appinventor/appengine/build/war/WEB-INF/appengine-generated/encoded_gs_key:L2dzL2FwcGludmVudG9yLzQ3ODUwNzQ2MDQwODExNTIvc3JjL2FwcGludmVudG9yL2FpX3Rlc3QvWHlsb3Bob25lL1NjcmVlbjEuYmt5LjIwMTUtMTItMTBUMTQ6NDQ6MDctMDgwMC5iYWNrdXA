@@ -1,0 +1,568 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="procedures_defnoreturn" id="1" x="385" y="-192">
+    <mutation>
+      <arg name="number"></arg>
+    </mutation>
+    <field name="NAME">PlayNote</field>
+    <field name="VAR0">number</field>
+    <statement name="STACK">
+      <block type="component_set_get" id="2" inline="false">
+        <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+        <field name="COMPONENT_SELECTOR">Sound1</field>
+        <field name="PROP">Source</field>
+        <value name="VALUE">
+          <block type="text_join" id="3" inline="false">
+            <mutation items="2"></mutation>
+            <value name="ADD0">
+              <block type="lexical_variable_get" id="4">
+                <field name="VAR">number</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="text" id="5">
+                <field name="TEXT">.wav</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="lists_add_items" id="6" inline="false">
+            <mutation items="1"></mutation>
+            <value name="LIST">
+              <block type="lexical_variable_get" id="7">
+                <field name="VAR">global notes</field>
+              </block>
+            </value>
+            <value name="ITEM0">
+              <block type="component_set_get" id="8">
+                <mutation component_type="Sound" set_or_get="get" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+                <field name="COMPONENT_SELECTOR">Sound1</field>
+                <field name="PROP">Source</field>
+              </block>
+            </value>
+            <next>
+              <block type="lists_add_items" id="9" inline="false">
+                <mutation items="1"></mutation>
+                <value name="LIST">
+                  <block type="lexical_variable_get" id="10">
+                    <field name="VAR">global times</field>
+                  </block>
+                </value>
+                <value name="ITEM0">
+                  <block type="component_method" id="11">
+                    <mutation component_type="Clock" method_name="Now" is_generic="false" instance_name="Clock1"></mutation>
+                    <field name="COMPONENT_SELECTOR">Clock1</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="component_method" id="12">
+                    <mutation component_type="Sound" method_name="Play" is_generic="false" instance_name="Sound1"></mutation>
+                    <field name="COMPONENT_SELECTOR">Sound1</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="13" x="896" y="-192">
+    <mutation component_type="Button" instance_name="Button2" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">Button2</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="14" inline="false">
+        <mutation name="PlayNote">
+          <arg name="number"></arg>
+        </mutation>
+        <field name="PROCNAME">PlayNote</field>
+        <value name="ARG0">
+          <block type="math_number" id="15">
+            <field name="NUM">2</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="global_declaration" id="16" inline="false" x="1135" y="-192">
+    <field name="NAME">count</field>
+    <value name="VALUE">
+      <block type="math_number" id="17">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+  </block>
+  <block type="component_event" id="18" x="385" y="53">
+    <mutation component_type="Button" instance_name="Button8" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">Button8</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="19" inline="false">
+        <mutation name="PlayNote">
+          <arg name="number"></arg>
+        </mutation>
+        <field name="PROCNAME">PlayNote</field>
+        <value name="ARG0">
+          <block type="math_number" id="20">
+            <field name="NUM">8</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="21" x="624" y="53">
+    <mutation component_type="Button" instance_name="Button6" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">Button6</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="22" inline="false">
+        <mutation name="PlayNote">
+          <arg name="number"></arg>
+        </mutation>
+        <field name="PROCNAME">PlayNote</field>
+        <value name="ARG0">
+          <block type="math_number" id="23">
+            <field name="NUM">6</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="24" x="862" y="53">
+    <mutation component_type="Button" instance_name="Button5" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">Button5</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="25" inline="false">
+        <mutation name="PlayNote">
+          <arg name="number"></arg>
+        </mutation>
+        <field name="PROCNAME">PlayNote</field>
+        <value name="ARG0">
+          <block type="math_number" id="26">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="27" x="1101" y="53">
+    <mutation></mutation>
+    <field name="NAME">PlayBackNote</field>
+    <statement name="STACK">
+      <block type="component_set_get" id="28" inline="false">
+        <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+        <field name="COMPONENT_SELECTOR">Sound1</field>
+        <field name="PROP">Source</field>
+        <value name="VALUE">
+          <block type="lists_select_item" id="29" inline="false">
+            <value name="LIST">
+              <block type="lexical_variable_get" id="30">
+                <field name="VAR">global notes</field>
+              </block>
+            </value>
+            <value name="NUM">
+              <block type="lexical_variable_get" id="31">
+                <field name="VAR">global count</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="component_method" id="32">
+            <mutation component_type="Sound" method_name="Play" is_generic="false" instance_name="Sound1"></mutation>
+            <field name="COMPONENT_SELECTOR">Sound1</field>
+            <next>
+              <block type="controls_if" id="33" inline="false">
+                <value name="IF0">
+                  <block type="math_compare" id="34" inline="true">
+                    <field name="OP">LT</field>
+                    <value name="A">
+                      <block type="lexical_variable_get" id="35">
+                        <field name="VAR">global count</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="lists_length" id="36" inline="false">
+                        <value name="LIST">
+                          <block type="lexical_variable_get" id="37">
+                            <field name="VAR">global notes</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="component_set_get" id="38" inline="false">
+                    <mutation component_type="Clock" set_or_get="set" property_name="TimerInterval" is_generic="false" instance_name="Clock1"></mutation>
+                    <field name="COMPONENT_SELECTOR">Clock1</field>
+                    <field name="PROP">TimerInterval</field>
+                    <value name="VALUE">
+                      <block type="component_method" id="39" inline="false">
+                        <mutation component_type="Clock" method_name="Duration" is_generic="false" instance_name="Clock1"></mutation>
+                        <field name="COMPONENT_SELECTOR">Clock1</field>
+                        <value name="ARG0">
+                          <block type="lists_select_item" id="40" inline="false">
+                            <value name="LIST">
+                              <block type="lexical_variable_get" id="41">
+                                <field name="VAR">global times</field>
+                              </block>
+                            </value>
+                            <value name="NUM">
+                              <block type="lexical_variable_get" id="42">
+                                <field name="VAR">global count</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="ARG1">
+                          <block type="lists_select_item" id="43" inline="false">
+                            <value name="LIST">
+                              <block type="lexical_variable_get" id="44">
+                                <field name="VAR">global times</field>
+                              </block>
+                            </value>
+                            <value name="NUM">
+                              <block type="math_add" id="45" inline="true">
+                                <mutation items="2"></mutation>
+                                <value name="NUM0">
+                                  <block type="lexical_variable_get" id="46">
+                                    <field name="VAR">global count</field>
+                                  </block>
+                                </value>
+                                <value name="NUM1">
+                                  <block type="math_number" id="47">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="lexical_variable_set" id="48" inline="false">
+                        <field name="VAR">global count</field>
+                        <value name="VALUE">
+                          <block type="math_add" id="49" inline="true">
+                            <mutation items="2"></mutation>
+                            <value name="NUM0">
+                              <block type="lexical_variable_get" id="50">
+                                <field name="VAR">global count</field>
+                              </block>
+                            </value>
+                            <value name="NUM1">
+                              <block type="math_number" id="51">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="component_set_get" id="52" inline="false">
+                            <mutation component_type="Clock" set_or_get="set" property_name="TimerEnabled" is_generic="false" instance_name="Clock1"></mutation>
+                            <field name="COMPONENT_SELECTOR">Clock1</field>
+                            <field name="PROP">TimerEnabled</field>
+                            <value name="VALUE">
+                              <block type="logic_boolean" id="53">
+                                <field name="BOOL">TRUE</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="54" x="385" y="449">
+    <mutation component_type="Button" instance_name="Button7" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">Button7</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="55" inline="false">
+        <mutation name="PlayNote">
+          <arg name="number"></arg>
+        </mutation>
+        <field name="PROCNAME">PlayNote</field>
+        <value name="ARG0">
+          <block type="math_number" id="56">
+            <field name="NUM">7</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="57" x="624" y="449">
+    <mutation component_type="Button" instance_name="Button1" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">Button1</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="58" inline="false">
+        <mutation name="PlayNote">
+          <arg name="number"></arg>
+        </mutation>
+        <field name="PROCNAME">PlayNote</field>
+        <value name="ARG0">
+          <block type="math_number" id="59">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="60" x="862" y="449">
+    <mutation component_type="Button" instance_name="Button3" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">Button3</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="61" inline="false">
+        <mutation name="PlayNote">
+          <arg name="number"></arg>
+        </mutation>
+        <field name="PROCNAME">PlayNote</field>
+        <value name="ARG0">
+          <block type="math_number" id="62">
+            <field name="NUM">3</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="63" x="1101" y="449">
+    <mutation component_type="Button" instance_name="Button4" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">Button4</field>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="64" inline="false">
+        <mutation name="PlayNote">
+          <arg name="number"></arg>
+        </mutation>
+        <field name="PROCNAME">PlayNote</field>
+        <value name="ARG0">
+          <block type="math_number" id="65">
+            <field name="NUM">4</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="global_declaration" id="66" inline="false" x="385" y="564">
+    <field name="NAME">times</field>
+    <value name="VALUE">
+      <block type="lists_create_with" id="67" inline="false">
+        <mutation items="2"></mutation>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="68" inline="false" x="744" y="564">
+    <field name="NAME">notes</field>
+    <value name="VALUE">
+      <block type="lists_create_with" id="69" inline="false">
+        <mutation items="2"></mutation>
+      </block>
+    </value>
+  </block>
+  <block type="component_event" id="70" x="1104" y="564">
+    <mutation component_type="Button" instance_name="PlayButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">PlayButton</field>
+    <statement name="DO">
+      <block type="controls_if" id="71" inline="false">
+        <value name="IF0">
+          <block type="math_compare" id="72" inline="true">
+            <field name="OP">GT</field>
+            <value name="A">
+              <block type="lists_length" id="73" inline="false">
+                <value name="LIST">
+                  <block type="lexical_variable_get" id="74">
+                    <field name="VAR">global notes</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="75">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="lexical_variable_set" id="76" inline="false">
+            <field name="VAR">global count</field>
+            <value name="VALUE">
+              <block type="math_number" id="77">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="procedures_callnoreturn" id="78">
+                <mutation name="PlayBackNote"></mutation>
+                <field name="PROCNAME">PlayBackNote</field>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="79" x="385" y="731">
+    <mutation component_type="Clock" instance_name="Clock1" event_name="Timer"></mutation>
+    <field name="COMPONENT_SELECTOR">Clock1</field>
+    <statement name="DO">
+      <block type="component_set_get" id="80" inline="false">
+        <mutation component_type="Clock" set_or_get="set" property_name="TimerEnabled" is_generic="false" instance_name="Clock1"></mutation>
+        <field name="COMPONENT_SELECTOR">Clock1</field>
+        <field name="PROP">TimerEnabled</field>
+        <value name="VALUE">
+          <block type="logic_boolean" id="81">
+            <field name="BOOL">FALSE</field>
+          </block>
+        </value>
+        <next>
+          <block type="procedures_callnoreturn" id="82">
+            <mutation name="PlayBackNote"></mutation>
+            <field name="PROCNAME">PlayBackNote</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="83" x="803" y="731">
+    <mutation component_type="Form" instance_name="Screen1" event_name="Initialize"></mutation>
+    <field name="COMPONENT_SELECTOR">Screen1</field>
+    <statement name="DO">
+      <block type="component_set_get" id="84" inline="false">
+        <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+        <field name="COMPONENT_SELECTOR">Sound1</field>
+        <field name="PROP">Source</field>
+        <value name="VALUE">
+          <block type="text" id="85">
+            <field name="TEXT">1.wav</field>
+          </block>
+        </value>
+        <next>
+          <block type="component_set_get" id="86" inline="false">
+            <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+            <field name="COMPONENT_SELECTOR">Sound1</field>
+            <field name="PROP">Source</field>
+            <value name="VALUE">
+              <block type="text" id="87">
+                <field name="TEXT">2.wav</field>
+              </block>
+            </value>
+            <next>
+              <block type="component_set_get" id="88" inline="false">
+                <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+                <field name="COMPONENT_SELECTOR">Sound1</field>
+                <field name="PROP">Source</field>
+                <value name="VALUE">
+                  <block type="text" id="89">
+                    <field name="TEXT">3.wav</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="component_set_get" id="90" inline="false">
+                    <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+                    <field name="COMPONENT_SELECTOR">Sound1</field>
+                    <field name="PROP">Source</field>
+                    <value name="VALUE">
+                      <block type="text" id="91">
+                        <field name="TEXT">4.wav</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="component_set_get" id="92" inline="false">
+                        <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+                        <field name="COMPONENT_SELECTOR">Sound1</field>
+                        <field name="PROP">Source</field>
+                        <value name="VALUE">
+                          <block type="text" id="93">
+                            <field name="TEXT">5.wav</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="component_set_get" id="94" inline="false">
+                            <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+                            <field name="COMPONENT_SELECTOR">Sound1</field>
+                            <field name="PROP">Source</field>
+                            <value name="VALUE">
+                              <block type="text" id="95">
+                                <field name="TEXT">6.wav</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="component_set_get" id="96" inline="false">
+                                <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+                                <field name="COMPONENT_SELECTOR">Sound1</field>
+                                <field name="PROP">Source</field>
+                                <value name="VALUE">
+                                  <block type="text" id="97">
+                                    <field name="TEXT">7.wav</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="component_set_get" id="98" inline="false">
+                                    <mutation component_type="Sound" set_or_get="set" property_name="Source" is_generic="false" instance_name="Sound1"></mutation>
+                                    <field name="COMPONENT_SELECTOR">Sound1</field>
+                                    <field name="PROP">Source</field>
+                                    <value name="VALUE">
+                                      <block type="text" id="99">
+                                        <field name="TEXT">8.wav</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="100" x="1224" y="731">
+    <mutation component_type="Button" instance_name="ResetButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">ResetButton</field>
+    <statement name="DO">
+      <block type="lexical_variable_set" id="101" inline="false">
+        <field name="VAR">global notes</field>
+        <value name="VALUE">
+          <block type="lists_create_with" id="102" inline="false">
+            <mutation items="2"></mutation>
+          </block>
+        </value>
+        <next>
+          <block type="lexical_variable_set" id="103" inline="false">
+            <field name="VAR">global times</field>
+            <value name="VALUE">
+              <block type="lists_create_with" id="104" inline="false">
+                <mutation items="2"></mutation>
+              </block>
+            </value>
+            <next>
+              <block type="component_method" id="105" inline="false">
+                <mutation component_type="Sound" method_name="Vibrate" is_generic="false" instance_name="Sound1"></mutation>
+                <field name="COMPONENT_SELECTOR">Sound1</field>
+                <value name="ARG0">
+                  <block type="math_number" id="106">
+                    <field name="NUM">50</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <yacodeblocks ya-version="138" language-version="19"></yacodeblocks>
+</xml>

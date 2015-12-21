@@ -1,0 +1,352 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="component_event" id="1" collapsed="true" x="213" y="-212">
+    <mutation component_type="Button" instance_name="KeywordSearchButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">KeywordSearchButton</field>
+    <statement name="DO">
+      <block type="component_set_get" id="2" inline="false">
+        <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="ResultsLabel"></mutation>
+        <field name="COMPONENT_SELECTOR">ResultsLabel</field>
+        <field name="PROP">Text</field>
+        <value name="VALUE">
+          <block type="text" id="3">
+            <field name="TEXT">searching Amazon...</field>
+          </block>
+        </value>
+        <next>
+          <block type="component_method" id="4" inline="false">
+            <mutation component_type="TinyWebDB" method_name="GetValue" is_generic="false" instance_name="TinyWebDB1"></mutation>
+            <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+            <comment pinned="false" h="80" w="160">Request data from web service sending user's search term as the tag.</comment>
+            <value name="ARG0">
+              <block type="component_set_get" id="5">
+                <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="SearchTextBox"></mutation>
+                <field name="COMPONENT_SELECTOR">SearchTextBox</field>
+                <field name="PROP">Text</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="6" x="72" y="-152">
+    <mutation component_type="TinyWebDB" instance_name="TinyWebDB1" event_name="GotValue"></mutation>
+    <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+    <comment pinned="false" h="80" w="160">GotValue is triggered when data arrives (from Amazon). If the data is a list, display it.</comment>
+    <statement name="DO">
+      <block type="controls_if" id="7" inline="false">
+        <value name="IF0">
+          <block type="lists_is_list" id="8" inline="false">
+            <value name="ITEM">
+              <block type="lexical_variable_get" id="9">
+                <mutation>
+                  <eventparam name="valueFromWebDB"></eventparam>
+                </mutation>
+                <field name="VAR">valueFromWebDB</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="lexical_variable_set" id="10" inline="false">
+            <field name="VAR">global resultsList</field>
+            <value name="VALUE">
+              <block type="lexical_variable_get" id="11">
+                <mutation>
+                  <eventparam name="valueFromWebDB"></eventparam>
+                </mutation>
+                <field name="VAR">valueFromWebDB</field>
+              </block>
+            </value>
+            <next>
+              <block type="component_set_get" id="12" inline="false">
+                <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="ResultsLabel"></mutation>
+                <field name="COMPONENT_SELECTOR">ResultsLabel</field>
+                <field name="PROP">Text</field>
+                <value name="VALUE">
+                  <block type="lexical_variable_get" id="13">
+                    <mutation>
+                      <eventparam name="valueFromWebDB"></eventparam>
+                    </mutation>
+                    <field name="VAR">valueFromWebDB</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_forEach" id="14" inline="false">
+                    <field name="VAR">bookItem</field>
+                    <comment pinned="false" h="130" w="354">Each bookItem in the list is itself a list. The title, cost, and isbn are the 1st, 2nd, and 3rd items of each sublist. Extract them, then display on separate lines(\n is a newline).</comment>
+                    <value name="LIST">
+                      <block type="lexical_variable_get" id="15">
+                        <field name="VAR">global resultsList</field>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="lexical_variable_set" id="16" inline="false">
+                        <field name="VAR">global title</field>
+                        <value name="VALUE">
+                          <block type="lists_select_item" id="17" inline="false">
+                            <value name="LIST">
+                              <block type="lexical_variable_get" id="18">
+                                <field name="VAR">bookItem</field>
+                              </block>
+                            </value>
+                            <value name="NUM">
+                              <block type="math_number" id="19">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="lexical_variable_set" id="20" inline="false">
+                            <field name="VAR">global cost</field>
+                            <value name="VALUE">
+                              <block type="lists_select_item" id="21" inline="false">
+                                <value name="LIST">
+                                  <block type="lexical_variable_get" id="22">
+                                    <field name="VAR">bookItem</field>
+                                  </block>
+                                </value>
+                                <value name="NUM">
+                                  <block type="math_number" id="23">
+                                    <field name="NUM">2</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="lexical_variable_set" id="24" inline="false">
+                                <field name="VAR">global isbn</field>
+                                <value name="VALUE">
+                                  <block type="lists_select_item" id="25" inline="false">
+                                    <value name="LIST">
+                                      <block type="lexical_variable_get" id="26">
+                                        <field name="VAR">bookItem</field>
+                                      </block>
+                                    </value>
+                                    <value name="NUM">
+                                      <block type="math_number" id="27">
+                                        <field name="NUM">3</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="component_set_get" id="28" inline="false">
+                                    <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="ResultsLabel"></mutation>
+                                    <field name="COMPONENT_SELECTOR">ResultsLabel</field>
+                                    <field name="PROP">Text</field>
+                                    <value name="VALUE">
+                                      <block type="text_join" id="29" inline="false">
+                                        <mutation items="7"></mutation>
+                                        <value name="ADD0">
+                                          <block type="component_set_get" id="30">
+                                            <mutation component_type="Label" set_or_get="get" property_name="Text" is_generic="false" instance_name="ResultsLabel"></mutation>
+                                            <field name="COMPONENT_SELECTOR">ResultsLabel</field>
+                                            <field name="PROP">Text</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD1">
+                                          <block type="text" id="31">
+                                            <field name="TEXT">\n\n</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD2">
+                                          <block type="lexical_variable_get" id="32">
+                                            <field name="VAR">global title</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD3">
+                                          <block type="text" id="33">
+                                            <field name="TEXT">\nISBN: </field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD4">
+                                          <block type="lexical_variable_get" id="34">
+                                            <field name="VAR">global isbn</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD5">
+                                          <block type="text" id="35">
+                                            <field name="TEXT">\nLowest Amazon Price: </field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD6">
+                                          <block type="lexical_variable_get" id="36">
+                                            <field name="VAR">global cost</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="global_declaration" id="37" inline="false" collapsed="true" x="680" y="5">
+    <field name="NAME">resultsList</field>
+    <value name="VALUE">
+      <block type="lists_create_with" id="38">
+        <mutation items="0"></mutation>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="39" inline="false" collapsed="true" x="712" y="48">
+    <field name="NAME">title</field>
+    <value name="VALUE">
+      <block type="text" id="40">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="41" inline="false" collapsed="true" x="124" y="505">
+    <field name="NAME">cost</field>
+    <value name="VALUE">
+      <block type="text" id="42">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="43" inline="false" collapsed="true" x="127" y="544">
+    <field name="NAME">isbn</field>
+    <value name="VALUE">
+      <block type="text" id="44">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+  </block>
+  <block type="component_event" id="45" collapsed="true" x="155" y="602">
+    <mutation component_type="Button" instance_name="ISBNButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">ISBNButton</field>
+    <statement name="DO">
+      <block type="component_set_get" id="46" inline="false">
+        <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="ResultsLabel"></mutation>
+        <field name="COMPONENT_SELECTOR">ResultsLabel</field>
+        <field name="PROP">Text</field>
+        <value name="VALUE">
+          <block type="text" id="47">
+            <field name="TEXT">looking up ISBN at Amazon...</field>
+          </block>
+        </value>
+        <next>
+          <block type="component_method" id="48" inline="false">
+            <mutation component_type="TinyWebDB" method_name="GetValue" is_generic="false" instance_name="TinyWebDB1"></mutation>
+            <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+            <comment pinned="false" h="80" w="160">Request data from web service sending user's search tern as the tag.</comment>
+            <value name="ARG0">
+              <block type="text_join" id="49" inline="false">
+                <mutation items="2"></mutation>
+                <value name="ADD0">
+                  <block type="text" id="50">
+                    <field name="TEXT">isbn:</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="component_set_get" id="51">
+                    <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="SearchTextBox"></mutation>
+                    <field name="COMPONENT_SELECTOR">SearchTextBox</field>
+                    <field name="PROP">Text</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="52" collapsed="true" x="150" y="669">
+    <mutation component_type="Button" instance_name="ScanButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">ScanButton</field>
+    <comment pinned="false" h="80" w="160">Invoke the scanner when user touches the ScanButton.</comment>
+    <statement name="DO">
+      <block type="component_method" id="53">
+        <mutation component_type="BarcodeScanner" method_name="DoScan" is_generic="false" instance_name="BarcodeScanner1"></mutation>
+        <field name="COMPONENT_SELECTOR">BarcodeScanner1</field>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="54" collapsed="true" x="119" y="707">
+    <mutation component_type="BarcodeScanner" instance_name="BarcodeScanner1" event_name="AfterScan"></mutation>
+    <field name="COMPONENT_SELECTOR">BarcodeScanner1</field>
+    <comment pinned="false" h="80" w="160">This is triggered when scanner gets a reading.</comment>
+    <statement name="DO">
+      <block type="component_set_get" id="55" inline="false">
+        <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="ResultsLabel"></mutation>
+        <field name="COMPONENT_SELECTOR">ResultsLabel</field>
+        <field name="PROP">Text</field>
+        <value name="VALUE">
+          <block type="text_join" id="56" inline="false">
+            <mutation items="2"></mutation>
+            <value name="ADD0">
+              <block type="text" id="57">
+                <field name="TEXT">now searching for...</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="lexical_variable_get" id="58">
+                <mutation>
+                  <eventparam name="result"></eventparam>
+                </mutation>
+                <field name="VAR">result</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="component_set_get" id="59" inline="false">
+            <mutation component_type="TextBox" set_or_get="set" property_name="Text" is_generic="false" instance_name="SearchTextBox"></mutation>
+            <field name="COMPONENT_SELECTOR">SearchTextBox</field>
+            <field name="PROP">Text</field>
+            <comment pinned="false" h="80" w="160">Show the scanned ISBN in the search box.</comment>
+            <value name="VALUE">
+              <block type="lexical_variable_get" id="60">
+                <mutation>
+                  <eventparam name="result"></eventparam>
+                </mutation>
+                <field name="VAR">result</field>
+              </block>
+            </value>
+            <next>
+              <block type="component_method" id="61" inline="false">
+                <mutation component_type="TinyWebDB" method_name="GetValue" is_generic="false" instance_name="TinyWebDB1"></mutation>
+                <field name="COMPONENT_SELECTOR">TinyWebDB1</field>
+                <comment pinned="false" h="80" w="160">Request data from web service sending scanned ISBN.</comment>
+                <value name="ARG0">
+                  <block type="text_join" id="62" inline="false">
+                    <mutation items="2"></mutation>
+                    <value name="ADD0">
+                      <block type="text" id="63">
+                        <field name="TEXT">isbn:</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="component_set_get" id="64">
+                        <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="SearchTextBox"></mutation>
+                        <field name="COMPONENT_SELECTOR">SearchTextBox</field>
+                        <field name="PROP">Text</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <yacodeblocks ya-version="138" language-version="19"></yacodeblocks>
+</xml>

@@ -1,0 +1,211 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="component_event" id="1" x="711" y="-473">
+    <mutation component_type="LocationSensor" instance_name="LocationSensor1" event_name="LocationChanged"></mutation>
+    <field name="COMPONENT_SELECTOR">LocationSensor1</field>
+    <statement name="DO">
+      <block type="lexical_variable_set" id="2" inline="false">
+        <field name="VAR">global lastKnownLocation</field>
+        <value name="VALUE">
+          <block type="component_set_get" id="3">
+            <mutation component_type="LocationSensor" set_or_get="get" property_name="CurrentAddress" is_generic="false" instance_name="LocationSensor1"></mutation>
+            <field name="COMPONENT_SELECTOR">LocationSensor1</field>
+            <field name="PROP">CurrentAddress</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="4" x="24" y="-400">
+    <mutation component_type="Texting" instance_name="Texting1" event_name="MessageReceived"></mutation>
+    <field name="COMPONENT_SELECTOR">Texting1</field>
+    <comment pinned="true" h="128" w="265">This event is triggered when the phone receives a text. "number" is the phone number from which the text was received. "messageText" is the message received.</comment>
+    <statement name="DO">
+      <block type="component_set_get" id="5" inline="false">
+        <mutation component_type="Texting" set_or_get="set" property_name="PhoneNumber" is_generic="false" instance_name="Texting1"></mutation>
+        <field name="COMPONENT_SELECTOR">Texting1</field>
+        <field name="PROP">PhoneNumber</field>
+        <value name="VALUE">
+          <block type="lexical_variable_get" id="6">
+            <mutation>
+              <eventparam name="number"></eventparam>
+            </mutation>
+            <field name="VAR">number</field>
+            <comment pinned="true" h="114" w="216">Prepare to send the response by specifying that you'll send the text to the number that just sent the text.</comment>
+          </block>
+        </value>
+        <next>
+          <block type="component_set_get" id="7" inline="false">
+            <mutation component_type="Texting" set_or_get="set" property_name="Message" is_generic="false" instance_name="Texting1"></mutation>
+            <field name="COMPONENT_SELECTOR">Texting1</field>
+            <field name="PROP">Message</field>
+            <value name="VALUE">
+              <block type="text_join" id="8" inline="false">
+                <mutation items="3"></mutation>
+                <comment pinned="false" h="105" w="292">This will build a text such as: "SMS message received from 111-2222. The message is: hello." Note that there are spaces after "from" and "is".</comment>
+                <value name="ADD0">
+                  <block type="component_set_get" id="9">
+                    <mutation component_type="Label" set_or_get="get" property_name="Text" is_generic="false" instance_name="ResponseLabel"></mutation>
+                    <field name="COMPONENT_SELECTOR">ResponseLabel</field>
+                    <field name="PROP">Text</field>
+                    <comment pinned="true" h="54" w="293">The message to send is the one in ResponseLabel.</comment>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text" id="10">
+                    <field name="TEXT">My last known location is: </field>
+                  </block>
+                </value>
+                <value name="ADD2">
+                  <block type="lexical_variable_get" id="11">
+                    <field name="VAR">global lastKnownLocation</field>
+                    <comment pinned="true" h="100" w="274">This is either "Unknown", the variable's default value, or an address set in LocationSensor.LocationChanged.</comment>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="component_method" id="12">
+                <mutation component_type="Texting" method_name="SendMessage" is_generic="false" instance_name="Texting1"></mutation>
+                <field name="COMPONENT_SELECTOR">Texting1</field>
+                <next>
+                  <block type="component_method" id="13" inline="false">
+                    <mutation component_type="TextToSpeech" method_name="Speak" is_generic="false" instance_name="TextToSpeech1"></mutation>
+                    <field name="COMPONENT_SELECTOR">TextToSpeech1</field>
+                    <value name="ARG0">
+                      <block type="text_join" id="14" inline="false">
+                        <mutation items="4"></mutation>
+                        <comment pinned="true" h="128" w="243">This will build a text such as: "SMS message received from 111-2222. The message is: hello." Note that there are spaces after "from" and "is".</comment>
+                        <value name="ADD0">
+                          <block type="text" id="15">
+                            <field name="TEXT">SMS message received from: </field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="lexical_variable_get" id="16">
+                            <mutation>
+                              <eventparam name="number"></eventparam>
+                            </mutation>
+                            <field name="VAR">number</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="text" id="17">
+                            <field name="TEXT">. The message is: </field>
+                          </block>
+                        </value>
+                        <value name="ADD3">
+                          <block type="lexical_variable_get" id="18">
+                            <mutation>
+                              <eventparam name="messageText"></eventparam>
+                            </mutation>
+                            <field name="VAR">messageText</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="global_declaration" id="19" inline="false" x="853" y="-310">
+    <field name="NAME">lastKnownLocation</field>
+    <value name="VALUE">
+      <block type="text" id="20">
+        <field name="TEXT">Unknown</field>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="21" inline="false" x="987" y="-226">
+    <field name="NAME">response</field>
+    <comment pinned="true" h="125" w="198">Define a variable to temporarily hold the data so it can be checked before putting it into the ResponseLabel.</comment>
+    <value name="VALUE">
+      <block type="text" id="22">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+  </block>
+  <block type="component_event" id="23" x="21" y="-60">
+    <mutation component_type="Button" instance_name="SubmitResponseButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">SubmitResponseButton</field>
+    <statement name="DO">
+      <block type="component_set_get" id="24" inline="false">
+        <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="ResponseLabel"></mutation>
+        <field name="COMPONENT_SELECTOR">ResponseLabel</field>
+        <field name="PROP">Text</field>
+        <comment pinned="true" h="82" w="202">Put the user's entry (NewResponseText.Text) into ResponseLabel.</comment>
+        <value name="VALUE">
+          <block type="component_set_get" id="25">
+            <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="NewResponseTextBox"></mutation>
+            <field name="COMPONENT_SELECTOR">NewResponseTextBox</field>
+            <field name="PROP">Text</field>
+          </block>
+        </value>
+        <next>
+          <block type="component_method" id="26" inline="false">
+            <mutation component_type="TinyDB" method_name="StoreValue" is_generic="false" instance_name="TinyDB1"></mutation>
+            <field name="COMPONENT_SELECTOR">TinyDB1</field>
+            <comment pinned="true" h="111" w="166">Store the custom response in the phone's database when the user submits it.</comment>
+            <value name="ARG0">
+              <block type="text" id="27">
+                <field name="TEXT">responseMessage</field>
+                <comment pinned="true" h="69" w="229">This tag just identifies the data so we can retrieve it later.</comment>
+              </block>
+            </value>
+            <value name="ARG1">
+              <block type="component_set_get" id="28">
+                <mutation component_type="Label" set_or_get="get" property_name="Text" is_generic="false" instance_name="ResponseLabel"></mutation>
+                <field name="COMPONENT_SELECTOR">ResponseLabel</field>
+                <field name="PROP">Text</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="29" x="621" y="-14">
+    <mutation component_type="Form" instance_name="Screen1" event_name="Initialize"></mutation>
+    <field name="COMPONENT_SELECTOR">Screen1</field>
+    <comment pinned="true" h="88" w="359">When the app begins, this event is triggered. If the user has entered a custom response, we need to load it in from the database. </comment>
+    <statement name="DO">
+      <block type="lexical_variable_set" id="30" inline="false">
+        <field name="VAR">global response</field>
+        <value name="VALUE">
+          <block type="component_method" id="31" inline="false">
+            <mutation component_type="TinyDB" method_name="GetValue" is_generic="false" instance_name="TinyDB1"></mutation>
+            <field name="COMPONENT_SELECTOR">TinyDB1</field>
+            <value name="ARG0">
+              <block type="text" id="32">
+                <field name="TEXT">responseMessage</field>
+              </block>
+            </value>
+            <value name="ARG1">
+              <block type="text" id="33">
+                <field name="TEXT"></field>
+                <comment pinned="true" h="101" w="219">If nothing has previously been stored in the database, the database will return an empty text object.</comment>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="component_set_get" id="34" inline="false">
+            <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="ResponseLabel"></mutation>
+            <field name="COMPONENT_SELECTOR">ResponseLabel</field>
+            <field name="PROP">Text</field>
+            <value name="VALUE">
+              <block type="lexical_variable_get" id="35">
+                <field name="VAR">global response</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <yacodeblocks ya-version="138" language-version="19"></yacodeblocks>
+</xml>

@@ -1,0 +1,203 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="procedures_defnoreturn" id="1" x="-545" y="-414">
+    <mutation></mutation>
+    <field name="NAME">MoveMole</field>
+    <comment pinned="false" h="80" w="160">Move the Mole to a random location on the canvas.</comment>
+    <statement name="STACK">
+      <block type="component_method" id="2" inline="false">
+        <mutation component_type="ImageSprite" method_name="MoveTo" is_generic="false" instance_name="Mole"></mutation>
+        <field name="COMPONENT_SELECTOR">Mole</field>
+        <value name="ARG0">
+          <block type="math_random_int" id="3" inline="true">
+            <comment pinned="false" h="80" w="160">Choose a random x-coordinate to specify how far right the Mole should move to.</comment>
+            <value name="FROM">
+              <block type="math_number" id="4">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_subtract" id="5" inline="true">
+                <value name="A">
+                  <block type="component_set_get" id="6">
+                    <mutation component_type="Canvas" set_or_get="get" property_name="Width" is_generic="false" instance_name="Canvas1"></mutation>
+                    <field name="COMPONENT_SELECTOR">Canvas1</field>
+                    <field name="PROP">Width</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="component_set_get" id="7">
+                    <mutation component_type="ImageSprite" set_or_get="get" property_name="Width" is_generic="false" instance_name="Mole"></mutation>
+                    <field name="COMPONENT_SELECTOR">Mole</field>
+                    <field name="PROP">Width</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="ARG1">
+          <block type="math_random_int" id="8" inline="true">
+            <comment pinned="false" h="80" w="160">Choose a random y-coordinate to specify how far down the Mole should move to.</comment>
+            <value name="FROM">
+              <block type="math_number" id="9">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_subtract" id="10" inline="true">
+                <value name="A">
+                  <block type="component_set_get" id="11">
+                    <mutation component_type="Canvas" set_or_get="get" property_name="Height" is_generic="false" instance_name="Canvas1"></mutation>
+                    <field name="COMPONENT_SELECTOR">Canvas1</field>
+                    <field name="PROP">Height</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="component_set_get" id="12">
+                    <mutation component_type="ImageSprite" set_or_get="get" property_name="Height" is_generic="false" instance_name="Mole"></mutation>
+                    <field name="COMPONENT_SELECTOR">Mole</field>
+                    <field name="PROP">Height</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="13" x="-555" y="-229">
+    <mutation component_type="Form" instance_name="Screen1" event_name="Initialize"></mutation>
+    <field name="COMPONENT_SELECTOR">Screen1</field>
+    <comment pinned="false" h="80" w="160">When the app opens, this block will trigger the MoveMole procedure.</comment>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="14">
+        <mutation name="MoveMole"></mutation>
+        <field name="PROCNAME">MoveMole</field>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="15" x="-288" y="-234">
+    <mutation component_type="Clock" instance_name="Clock1" event_name="Timer"></mutation>
+    <field name="COMPONENT_SELECTOR">Clock1</field>
+    <comment pinned="false" h="80" w="160">When the Clock1.Timer event is triggered it will move the Mole.</comment>
+    <statement name="DO">
+      <block type="procedures_callnoreturn" id="16">
+        <mutation name="MoveMole"></mutation>
+        <field name="PROCNAME">MoveMole</field>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="17" x="-77" y="-237">
+    <mutation component_type="Button" instance_name="ResetButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">ResetButton</field>
+    <comment pinned="false" h="80" w="160">This button clicked event will reset the scores to 0.</comment>
+    <statement name="DO">
+      <block type="component_set_get" id="18" inline="false">
+        <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="HitsCountLabel"></mutation>
+        <field name="COMPONENT_SELECTOR">HitsCountLabel</field>
+        <field name="PROP">Text</field>
+        <value name="VALUE">
+          <block type="math_number" id="19">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="component_set_get" id="20" inline="false">
+            <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="MissesCountLabel"></mutation>
+            <field name="COMPONENT_SELECTOR">MissesCountLabel</field>
+            <field name="PROP">Text</field>
+            <value name="VALUE">
+              <block type="math_number" id="21">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="22" x="352" y="-200">
+    <mutation component_type="ImageSprite" instance_name="Mole" event_name="Touched"></mutation>
+    <field name="COMPONENT_SELECTOR">Mole</field>
+    <comment pinned="false" h="80" w="160">When the Mole is touched, Sound1 will be called to vibrate for 100 milliseconds.</comment>
+    <statement name="DO">
+      <block type="component_method" id="23" inline="false">
+        <mutation component_type="Sound" method_name="Vibrate" is_generic="false" instance_name="Sound1"></mutation>
+        <field name="COMPONENT_SELECTOR">Sound1</field>
+        <value name="ARG0">
+          <block type="math_number" id="24">
+            <field name="NUM">100</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="25" x="-341" y="-126">
+    <mutation component_type="Canvas" instance_name="Canvas1" event_name="Touched"></mutation>
+    <field name="COMPONENT_SELECTOR">Canvas1</field>
+    <comment pinned="false" h="101" w="307">When the Canvas is touched, this set of blocks will check to see if the touchedSprite (Mole), was touched and increase the score appropriately.</comment>
+    <statement name="DO">
+      <block type="controls_if" id="26" inline="false">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="lexical_variable_get" id="27">
+            <mutation>
+              <eventparam name="touchedAnySprite"></eventparam>
+            </mutation>
+            <field name="VAR">touchedAnySprite</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="component_set_get" id="28" inline="false">
+            <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="HitsCountLabel"></mutation>
+            <field name="COMPONENT_SELECTOR">HitsCountLabel</field>
+            <field name="PROP">Text</field>
+            <value name="VALUE">
+              <block type="math_add" id="29" inline="true">
+                <mutation items="2"></mutation>
+                <value name="NUM0">
+                  <block type="component_set_get" id="30">
+                    <mutation component_type="Label" set_or_get="get" property_name="Text" is_generic="false" instance_name="HitsCountLabel"></mutation>
+                    <field name="COMPONENT_SELECTOR">HitsCountLabel</field>
+                    <field name="PROP">Text</field>
+                  </block>
+                </value>
+                <value name="NUM1">
+                  <block type="math_number" id="31">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="component_set_get" id="32" inline="false">
+            <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="MissesCountLabel"></mutation>
+            <field name="COMPONENT_SELECTOR">MissesCountLabel</field>
+            <field name="PROP">Text</field>
+            <value name="VALUE">
+              <block type="math_add" id="33" inline="true">
+                <mutation items="2"></mutation>
+                <value name="NUM0">
+                  <block type="component_set_get" id="34">
+                    <mutation component_type="Label" set_or_get="get" property_name="Text" is_generic="false" instance_name="MissesCountLabel"></mutation>
+                    <field name="COMPONENT_SELECTOR">MissesCountLabel</field>
+                    <field name="PROP">Text</field>
+                  </block>
+                </value>
+                <value name="NUM1">
+                  <block type="math_number" id="35">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <yacodeblocks ya-version="138" language-version="19"></yacodeblocks>
+</xml>

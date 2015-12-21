@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="HelloPurr">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/war/templates/HelloPurr/HelloPurr.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

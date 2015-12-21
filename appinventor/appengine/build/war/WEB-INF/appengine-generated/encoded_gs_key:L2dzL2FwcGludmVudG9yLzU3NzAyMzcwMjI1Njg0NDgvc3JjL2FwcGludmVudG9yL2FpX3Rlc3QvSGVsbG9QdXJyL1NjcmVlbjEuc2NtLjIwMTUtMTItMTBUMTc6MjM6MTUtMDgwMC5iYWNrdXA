@@ -1,0 +1,4 @@
+#|
+$JSON
+{"YaVersion":"138","Source":"Form","Properties":{"$Version":"18","Scrollable":"True","$Type":"Form","$Name":"Screen1","Title":"Screen1","Uuid":"0","$Components":[{"$Name":"Button1","$Type":"Button","$Version":"6","Uuid":"1298415571","Image":"kitty.png"},{"$Name":"Sound1","$Type":"Sound","$Version":"3","Uuid":"940103767","Source":"meow.mp3"}]}}
+|#

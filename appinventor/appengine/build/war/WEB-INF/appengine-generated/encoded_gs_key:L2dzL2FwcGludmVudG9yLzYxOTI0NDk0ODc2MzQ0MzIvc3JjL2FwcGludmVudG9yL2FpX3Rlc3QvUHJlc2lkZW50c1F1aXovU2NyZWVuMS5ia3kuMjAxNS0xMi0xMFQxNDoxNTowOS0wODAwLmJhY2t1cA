@@ -1,0 +1,310 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="global_declaration" id="1" inline="false" x="-157" y="-8">
+    <field name="NAME">QuestionList</field>
+    <value name="VALUE">
+      <block type="lists_create_with" id="2" inline="false">
+        <mutation items="4"></mutation>
+        <value name="ADD0">
+          <block type="text" id="3">
+            <field name="TEXT">Which president implemented the 'New Deal' during the Great Depression?</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="text" id="4">
+            <field name="TEXT">Which president granted communist China formal recognition in 1979?</field>
+          </block>
+        </value>
+        <value name="ADD2">
+          <block type="text" id="5">
+            <field name="TEXT">Which president resigned due to the Watergate scandal?</field>
+          </block>
+        </value>
+        <value name="ADD3">
+          <block type="text" id="6">
+            <field name="TEXT">Which president was in office when two atom bombs were dropped on Japan?</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="7" inline="false" x="775" y="-8">
+    <field name="NAME">currentQuestionIndex</field>
+    <value name="VALUE">
+      <block type="math_number" id="8">
+        <field name="NUM">1</field>
+      </block>
+    </value>
+  </block>
+  <block type="component_event" id="9" x="-157" y="120">
+    <mutation component_type="Form" instance_name="Screen1" event_name="Initialize"></mutation>
+    <field name="COMPONENT_SELECTOR">Screen1</field>
+    <statement name="DO">
+      <block type="component_set_get" id="10" inline="false">
+        <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="QuestionLabel"></mutation>
+        <field name="COMPONENT_SELECTOR">QuestionLabel</field>
+        <field name="PROP">Text</field>
+        <value name="VALUE">
+          <block type="lists_select_item" id="11" inline="false">
+            <value name="LIST">
+              <block type="lexical_variable_get" id="12">
+                <field name="VAR">global QuestionList</field>
+              </block>
+            </value>
+            <value name="NUM">
+              <block type="math_number" id="13">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="component_event" id="14" x="499" y="120">
+    <mutation component_type="Button" instance_name="AnswerButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">AnswerButton</field>
+    <statement name="DO">
+      <block type="controls_if" id="15" inline="false">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="math_compare" id="16" inline="true">
+            <field name="OP">EQ</field>
+            <comment pinned="false" h="80" w="160">Compare the user's answer in AnswerText with the current answer.</comment>
+            <value name="A">
+              <block type="component_set_get" id="17">
+                <mutation component_type="TextBox" set_or_get="get" property_name="Text" is_generic="false" instance_name="AnswerText"></mutation>
+                <field name="COMPONENT_SELECTOR">AnswerText</field>
+                <field name="PROP">Text</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="lists_select_item" id="18" inline="false">
+                <value name="LIST">
+                  <block type="lexical_variable_get" id="19">
+                    <field name="VAR">global AnswerList</field>
+                  </block>
+                </value>
+                <value name="NUM">
+                  <block type="lexical_variable_get" id="20">
+                    <field name="VAR">global currentQuestionIndex</field>
+                    <comment pinned="false" h="80" w="160">The position (index) of each answer is the same as that of each question.</comment>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="component_set_get" id="21" inline="false">
+            <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="RightWrongLabel"></mutation>
+            <field name="COMPONENT_SELECTOR">RightWrongLabel</field>
+            <field name="PROP">Text</field>
+            <value name="VALUE">
+              <block type="text" id="22">
+                <field name="TEXT">Correct!</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="component_set_get" id="23" inline="false">
+            <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="RightWrongLabel"></mutation>
+            <field name="COMPONENT_SELECTOR">RightWrongLabel</field>
+            <field name="PROP">Text</field>
+            <value name="VALUE">
+              <block type="text" id="24">
+                <field name="TEXT">Incorrect!</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="global_declaration" id="25" inline="false" x="-157" y="326">
+    <field name="NAME">PictureList</field>
+    <value name="VALUE">
+      <block type="lists_create_with" id="26" inline="false">
+        <mutation items="4"></mutation>
+        <value name="ADD0">
+          <block type="text" id="27">
+            <field name="TEXT">roosChurch.gif</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="text" id="28">
+            <field name="TEXT">carterChina.gif</field>
+          </block>
+        </value>
+        <value name="ADD2">
+          <block type="text" id="29">
+            <field name="TEXT">nixon.gif</field>
+          </block>
+        </value>
+        <value name="ADD3">
+          <block type="text" id="30">
+            <field name="TEXT">atomic.gif</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="global_declaration" id="31" inline="false" x="359" y="326">
+    <field name="NAME">AnswerList</field>
+    <value name="VALUE">
+      <block type="lists_create_with" id="32" inline="false">
+        <mutation items="4"></mutation>
+        <value name="ADD0">
+          <block type="text" id="33">
+            <field name="TEXT">Roosevelt</field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="text" id="34">
+            <field name="TEXT">Carter</field>
+          </block>
+        </value>
+        <value name="ADD2">
+          <block type="text" id="35">
+            <field name="TEXT">Nixon</field>
+          </block>
+        </value>
+        <value name="ADD3">
+          <block type="text" id="36">
+            <field name="TEXT">Truman</field>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="component_event" id="37" x="848" y="326">
+    <mutation component_type="Button" instance_name="NextButton" event_name="Click"></mutation>
+    <field name="COMPONENT_SELECTOR">NextButton</field>
+    <statement name="DO">
+      <block type="component_set_get" id="38" inline="false">
+        <mutation component_type="TextBox" set_or_get="set" property_name="Text" is_generic="false" instance_name="AnswerText"></mutation>
+        <field name="COMPONENT_SELECTOR">AnswerText</field>
+        <field name="PROP">Text</field>
+        <comment pinned="false" h="80" w="160">Blank out the AnswerText and RightWrongLabel.</comment>
+        <value name="VALUE">
+          <block type="text" id="39">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <next>
+          <block type="component_set_get" id="40" inline="false">
+            <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="RightWrongLabel"></mutation>
+            <field name="COMPONENT_SELECTOR">RightWrongLabel</field>
+            <field name="PROP">Text</field>
+            <value name="VALUE">
+              <block type="text" id="41">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+            <next>
+              <block type="lexical_variable_set" id="42" inline="false">
+                <field name="VAR">global currentQuestionIndex</field>
+                <comment pinned="false" h="80" w="160">Increment the index.</comment>
+                <value name="VALUE">
+                  <block type="math_add" id="43" inline="true">
+                    <mutation items="2"></mutation>
+                    <value name="NUM0">
+                      <block type="lexical_variable_get" id="44">
+                        <field name="VAR">global currentQuestionIndex</field>
+                      </block>
+                    </value>
+                    <value name="NUM1">
+                      <block type="math_number" id="45">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="46" inline="false">
+                    <value name="IF0">
+                      <block type="math_compare" id="47" inline="true">
+                        <field name="OP">GT</field>
+                        <comment pinned="false" h="80" w="160">If the index is larger than length of the list, revert back to the 1st question.</comment>
+                        <value name="A">
+                          <block type="lexical_variable_get" id="48">
+                            <field name="VAR">global currentQuestionIndex</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="lists_length" id="49" inline="false">
+                            <value name="LIST">
+                              <block type="lexical_variable_get" id="50">
+                                <field name="VAR">global QuestionList</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="lexical_variable_set" id="51" inline="false">
+                        <field name="VAR">global currentQuestionIndex</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="52">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="component_set_get" id="53" inline="false">
+                        <mutation component_type="Label" set_or_get="set" property_name="Text" is_generic="false" instance_name="QuestionLabel"></mutation>
+                        <field name="COMPONENT_SELECTOR">QuestionLabel</field>
+                        <field name="PROP">Text</field>
+                        <value name="VALUE">
+                          <block type="lists_select_item" id="54" inline="false">
+                            <comment pinned="false" h="80" w="160">Select the "CurrentQuestionIndexth" question and place it in the QuestionLabel.</comment>
+                            <value name="LIST">
+                              <block type="lexical_variable_get" id="55">
+                                <field name="VAR">global QuestionList</field>
+                              </block>
+                            </value>
+                            <value name="NUM">
+                              <block type="lexical_variable_get" id="56">
+                                <field name="VAR">global currentQuestionIndex</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="component_set_get" id="57" inline="false">
+                            <mutation component_type="Image" set_or_get="set" property_name="Picture" is_generic="false" instance_name="Image1"></mutation>
+                            <field name="COMPONENT_SELECTOR">Image1</field>
+                            <field name="PROP">Picture</field>
+                            <value name="VALUE">
+                              <block type="lists_select_item" id="58" inline="false">
+                                <comment pinned="false" h="80" w="160">Select the "CurrentQuestionIndexth" question and place it in the QuestionLabel.</comment>
+                                <value name="LIST">
+                                  <block type="lexical_variable_get" id="59">
+                                    <field name="VAR">global PictureList</field>
+                                  </block>
+                                </value>
+                                <value name="NUM">
+                                  <block type="lexical_variable_get" id="60">
+                                    <field name="VAR">global currentQuestionIndex</field>
+                                    <comment pinned="false" h="80" w="160">The same index is used to select both a pic and a question.</comment>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <yacodeblocks ya-version="138" language-version="19"></yacodeblocks>
+</xml>
